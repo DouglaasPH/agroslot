@@ -1,6 +1,3 @@
--- Esquema PostgreSQL gerado a partir do diagrama (BRMW)
-
--- Tipo ENUM da espécie (ajuste os valores conforme suas espécies)
 CREATE TYPE especie_planta AS ENUM ('SOJA');
 
 CREATE TABLE usuarios (
