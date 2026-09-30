@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "app-frontend",
+    "slug": "app-frontend",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-status-bar"
+    ]
+  }
+}
