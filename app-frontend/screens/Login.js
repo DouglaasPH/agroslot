@@ -6,6 +6,8 @@ import Input from "../components/BasicInput";
 import { useState } from "react";
 import BasicCard from "../components/BasicCard";
 import { validateEmail, validatePassword } from "../common/Validation";
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function LoginScreen({ navigation }) {
   const styles = ThemedStyles();
@@ -41,36 +43,57 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-    <View style={[styles.container, { padding: 5 }]}>
-      <BasicCard style={{ width: '85%' }}>
-        <Text style={[styles.colorPrimary, { textAlign: 'left', fontSize: 20, fontWeight: 700 }]}>Entrar na conta</Text>
+    <View style={[styles.container]}>
+      <LinearGradient
+        colors={[Colors.colorPrimaryLight.color, Colors.colorGrass.color]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={[styles.container, { width: '100%', gap: 5 }]}
+      >
 
-        <Input
-          label="Email"
-          placeholder="voce@email.com"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          error={emailError}
-          errorMessage="Email inválido"
-        />
+        <View style={{ backgroundColor: Colors.whiteBackground.backgroundColor, borderRadius: '25%', padding: 12 }}>
+          <Ionicons name='leaf' size={40} color={Colors.colorPrimary.color} />
+        </View>
 
-        <Input
-          label="Senha"
-          placeholder="********"
-          value={password}
-          onChangeText={setPassword}
-          keyboardType="password"
-          error={passwordError}
-          secureTextEntry
-          errorMessage="Senha inválida"
-        />
+        <View style={{ alignItems: 'center', paddingBottom: 10 }}>
+          <Text style={{ fontSize: 28, color: Colors.whiteBackground.backgroundColor, fontWeight: '500' }}>AgroSlot</Text>
+          <Text style={{ fontSize: 12, color: Colors.whiteBackground.backgroundColor, opacity: 0.85 }}>Gestão inteligente de Soja</Text>
+        </View>
 
-        <BasicButton onPress={handleLogin} disabled={false} loading={false} title={'Entrar'} />
+        <BasicCard style={{ width: '85%' }}>
+          <Text style={[styles.colorPrimary, { textAlign: 'left', fontSize: 20, fontWeight: 700 }]}>Entrar na conta</Text>
 
-      </BasicCard>
+          <Input
+            label="Email"
+            placeholder="voce@email.com"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            error={emailError}
+            errorMessage="Email inválido"
+          />
 
-      <StatusBar style="auto" />
+          <Input
+            label="Senha"
+            placeholder="********"
+            value={password}
+            onChangeText={setPassword}
+            keyboardType="password"
+            error={passwordError}
+            secureTextEntry
+            errorMessage="Senha inválida"
+          />
+
+          <Text style={{ textAlign: 'right', color: Colors.colorPrimaryLight.color }} onPress={() => navigation.navigate('Recuperar Senha')}>Esqueci a minha senha</Text>
+
+          <BasicButton onPress={handleLogin} disabled={false} loading={false} title={'Entrar'} />
+
+          <Text style={{ textAlign: 'center', color: Colors.colorPrimaryLight.color }} onPress={() => navigation.navigate('Criar Conta')}>Não tem conta? Crie uma aqui</Text>
+
+        </BasicCard>
+
+        <StatusBar style="auto" />
+      </LinearGradient>
     </View>
   );
 }
