@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-//verifica as informações necessárias para recuperar a senha
 public class ForgotPasswordRequest {
 
     @NotBlank(message = "O e-mail é obrigatório")

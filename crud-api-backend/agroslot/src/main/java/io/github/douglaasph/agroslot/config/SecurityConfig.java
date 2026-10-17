@@ -34,29 +34,19 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
 
-            // Não mantém sessão HTTP p authenticacao
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-
-            //Define as permissões das rotas
             .authorizeHttpRequests(auth -> auth
-            // Permite que o Spring processe erros da aplicação
             .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-
-            // Rotas públicas de autenticação
             .requestMatchers(
                 HttpMethod.POST,
                 "/auth/register",
                 "/auth/login",
                 "/auth/forgot-password"
             ).permitAll()
-
-            // Demais requisições exigem autenticaçãoj
             .anyRequest().authenticated()
         )
-
-            //desativar os mecanismos de login padrão
             .httpBasic(basic -> basic.disable())
             .formLogin(form -> form.disable())
             .addFilterBefore(

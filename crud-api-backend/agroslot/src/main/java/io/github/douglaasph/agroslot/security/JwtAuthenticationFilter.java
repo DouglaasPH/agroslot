@@ -49,7 +49,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = authorization.substring(7);
 
         try {
-            // Extrai o email após validar a assinat do token
             String email = jwtService.extractSubject(token);
 
             if (SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -86,7 +85,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
 
         } catch (JwtException | IllegalArgumentException exception) {
-            // Token inválido ou expirado --> n autentica a requisição
             SecurityContextHolder.clearContext();
         }
 

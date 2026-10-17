@@ -10,7 +10,6 @@ import lombok.Setter;
 @Getter 
 @Setter
 @NoArgsConstructor  
-// classe responsável por validar e representar os dados que o cliente quando cria uma conta
 public class RegisterRequest {
 
     @NotBlank(message = "O nome é Obrigatório")

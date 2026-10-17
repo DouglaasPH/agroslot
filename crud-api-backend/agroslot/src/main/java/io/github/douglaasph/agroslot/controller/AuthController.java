@@ -19,7 +19,6 @@ import io.github.douglaasph.agroslot.service.AuthService;
 @RestController 
 @RequestMapping("/auth")
 
-//classe responspavel por receber as requisitções http de autenticação e orientar elas pro caminho correto
 public class AuthController {
 
     private final AuthService authService;
@@ -28,10 +27,8 @@ public class AuthController {
         this.authService = authService;
     }
 
-    //define a rota de cadastro 
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> register(
-            //requestbody permite o string oconverter o json em objeto
             @RequestBody RegisterRequest request
     ) {
         RegisterResponse response = authService.register(request);
@@ -40,7 +37,6 @@ public class AuthController {
                 .status(HttpStatus.CREATED)
                 .body(response);
     }
-    //definicao da rota d elogin
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(
             @RequestBody LoginRequest request
@@ -50,8 +46,6 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    //endopoint para recuperar senha
-    //a ideia é pegar o email do user e enviar um email para ele com o link pra rec
     @PostMapping("/forgot-password")
     public ResponseEntity<ForgotPasswordResponse> forgotPassword(
             @RequestBody ForgotPasswordRequest request

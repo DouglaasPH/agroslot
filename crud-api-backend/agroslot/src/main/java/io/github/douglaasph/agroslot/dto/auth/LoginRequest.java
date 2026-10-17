@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter 
 @Setter 
 @NoArgsConstructor 
-//a classe deve verificar as informações que o cliente envia quuando faz login
 public class LoginRequest {
 
     @NotBlank(message = "O email é Obrigatório")
