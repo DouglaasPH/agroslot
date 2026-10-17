@@ -27,7 +27,6 @@ import io.github.douglaasph.agroslot.dto.auth.RegisterResponse;
 import io.github.douglaasph.agroslot.model.User;
 import io.github.douglaasph.agroslot.repository.UserRepository;
 
-//biblioteca mockito usada para criar objetos de 'template' pros testes 
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
 
@@ -50,7 +49,6 @@ class AuthServiceTest {
                 RegisterRequest.class
         );
 
-        //quando o request da informação chegar ---> retorne a mensagem
         when(request.getNome()).thenReturn("Usuario Teste");
         when(request.getEmail()).thenReturn(" TESTE@AGROSLOT.COM ");
         when(request.getPassword()).thenReturn("Teste123!");

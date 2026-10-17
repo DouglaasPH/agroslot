@@ -1,18 +1,11 @@
 package io.github.douglaasph.agroslot.controller;
 
+import io.github.douglaasph.agroslot.dto.auth.*;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import io.github.douglaasph.agroslot.dto.auth.ForgotPasswordRequest;
-import io.github.douglaasph.agroslot.dto.auth.ForgotPasswordResponse;
-import io.github.douglaasph.agroslot.dto.auth.LoginRequest;
-import io.github.douglaasph.agroslot.dto.auth.LoginResponse;
-import io.github.douglaasph.agroslot.dto.auth.RegisterRequest;
-import io.github.douglaasph.agroslot.dto.auth.RegisterResponse;
 import io.github.douglaasph.agroslot.service.AuthService;
 
 
@@ -37,7 +30,8 @@ public class AuthController {
                 .status(HttpStatus.CREATED)
                 .body(response);
     }
-    @PostMapping("/login")
+
+    @GetMapping("/login")
     public ResponseEntity<LoginResponse> login(
             @RequestBody LoginRequest request
     ) {
@@ -46,15 +40,17 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/forgot-password")
-    public ResponseEntity<ForgotPasswordResponse> forgotPassword(
-            @RequestBody ForgotPasswordRequest request
+    @GetMapping("/forgot-password")
+    public ResponseEntity<Void> forgotPassword(
+            @Valid @RequestBody ForgotPasswordRequest request
     ) {
-        ForgotPasswordResponse response =
-                authService.forgotPassword(request);
-
-        return ResponseEntity.ok(response);
+        authService.requestPasswordReset(request.getEmail());
+        return ResponseEntity.accepted().build();
     }
 
-
+    @PutMapping("/reset-password")
+    public ResponseEntity<Void> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        authService.resetPassword(request.getToken(), request.getNewPassword());
+        return ResponseEntity.noContent().build();
+    }
 }
